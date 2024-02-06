@@ -1,5 +1,7 @@
 import { useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api'
+import './home.css';
 
 // https://api.themoviedb.org/3/movie/now_playing?api_key={{api_key}}&language=pt-BR
 
@@ -26,7 +28,8 @@ function Home(){
         async function loadFilmes(){
             const response = await api.get("movie/now_playing", {
                 params:{
-                    api_key: apikey,
+                    api_key: "6939aa7648d2f7e9288ea596fe1ae17b"
+                    ,
                     language: "pt-BR",
                     page: 1,
                 }
@@ -46,7 +49,8 @@ function Home(){
                     return(
                         <article key={filme.id}>
                             <strong>{filme.title}</strong>
-                            <img src={`https://image.tmdb.org/t/p/original/${filme.poster_path} alth={filme.title`} />
+                            <img src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`} alt={filme.title} />
+                            <Link to={`/filme/${filme.id}`}>Acessar</Link>
                         </article>
                     )
                 })}

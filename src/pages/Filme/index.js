@@ -1,7 +1,7 @@
 function Filme(){
     return(
         <div>
-            <h1>FILME</h1>
+            <h1>Detalhes do Filme</h1>
         </div>
     )
 }
