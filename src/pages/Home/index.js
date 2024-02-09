@@ -5,8 +5,6 @@ import './home.css';
 
 // https://api.themoviedb.org/3/movie/now_playing?api_key={{api_key}}&language=pt-BR
 
-
-
 function Home(){
     const [filmes, setFilmes] = useState([]);
     const [loading, setLoading] = useState(true);
