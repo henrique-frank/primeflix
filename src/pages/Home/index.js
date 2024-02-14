@@ -5,21 +5,6 @@ import './home.css';
 
 // https://api.themoviedb.org/3/movie/now_playing?api_key={{api_key}}&language=pt-BR
 
-
-// fetch('../pages/Home/api-key.txt')
-// .then(function(response) {
-//     console.log(response);
-//   return response.text();
-// })
-// .then(function(data) {
-//   var apiKey = data.trim();
-//   console.log(apiKey);
-// })
-// .catch(function(error) {
-//   console.error('Erro ao carregar a chave de API.', error);
-// });
-
-
 function Home(){
     const [filmes, setFilmes] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,10 +12,10 @@ function Home(){
     useEffect(()=>{
 
         async function loadFilmes(){
+
             const response = await api.get("movie/now_playing", {
                 params:{
-                    api_key: "6939aa7648d2f7e9288ea596fe1ae17b"
-                    ,
+                    api_key: process.env.REACT_APP_API_KEY,
                     language: "pt-BR",
                     page: 1,
                 }
