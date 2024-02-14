@@ -12,7 +12,7 @@ function Home(){
     useEffect(()=>{
 
         async function loadFilmes(){
-
+            
             const response = await api.get("movie/now_playing", {
                 params:{
                     api_key: process.env.REACT_APP_API_KEY,
