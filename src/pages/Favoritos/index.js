@@ -1,37 +1,46 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import './favoritos.css';
 
-
-function Favoritos(){
+function Favoritos() {
 
     const [filmes, setFilmes] = useState([]);
 
-    useEffect(()=>{
-        const tarefasStorage = localStorage.getItem('@primeflix');
+    useEffect(()=> {
 
-        if(tarefasStorage){
-            setFilmes(JSON.parse(tarefasStorage))
-        }
+        const minhaLista = localStorage.getItem("@primeflix");
+        setFilmes(JSON.parse(minhaLista) || []);
 
-    },[]);
+    }, [])
 
-    useEffect(() => {
-        localStorage.setItem('@filme', JSON.stringify(filmes))
-    }, [filmes]);
+    function removerFilme(id){
+        let novaLista = filmes.filter((item) => {
+            return(
+                item.id !== id
+            );
+        });
 
-    return (
-        <div>
-            
-            <h1>Lista de favoritos:</h1>   
+        setFilmes(novaLista);
+        localStorage.setItem("@primeflix", JSON.stringify(novaLista));
+    }
 
-
+    return(
+        <div className="meus-filmes">
+            <h1>Meus filmes</h1>
             <ul>
-                {filmes.map( filme => (
-                    <li key={filme.title}>{filme.title}</li>
-                ))}
+                {filmes.map((item) => {
+                    return(
+                    <li key={item.id}>
+                        <span>{item.title}</span>
+                        <div className="button-and-link">
+                            <Link to={`/filme/${item.id}`}> Ver detalhes </Link>
+                            <button onClick={() => removerFilme(item.id)}>Excluir</button>
+                        </div>
+                    </li>
+                    )
+                })}
             </ul>
-
         </div>
-    )
-}
 
-export default Favoritos;
+    )
+} export default Favoritos;
